@@ -9,6 +9,24 @@
 ## Usage
 
 ```js
+const service = require('methodd')
+
+const app = service()
+app.get('/', (query) => {
+  return 'hello ' + query.name
+})
+
+app.get('/:name', query => {
+  return 'Your name is ' + query.name
+})
+
+app.get('/', {
+  name: 'world'
+})
+// => hello world
+
+app.get('/foo')
+// => Your name is foo
 
 ```
 
