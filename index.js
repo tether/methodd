@@ -18,9 +18,11 @@ module.exports = function () {
       else return function (path, ...args) {
         const cb = args[0]
         if (typeof cb === 'function') {
-          routes[key] = cb
+          const obj = routes[key] || {}
+          obj[path] = cb
+          routes[key] = obj
         } else {
-          return routes[key](...args)
+          return routes[key][path](...args)
         }
       }
     }
