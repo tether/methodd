@@ -93,3 +93,8 @@ test('should keep silent if route has not been defined', assert => {
   app.get('/hello')
   assert.ok('test passed')
 })
+
+test('should return a function', assert => {
+  assert.plan(1)
+  assert.equal(typeof service(), 'function')
+})

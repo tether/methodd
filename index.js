@@ -12,10 +12,17 @@ const router = require('./lib/router')
 
 module.exports = function () {
   const routes = {}
-  const original = {
-    alias: () => {},
-    routes: () => {}
+  const original = function () {
+
   }
+
+  original.alias = () => {}
+  original.routes = () => {}
+  return proxy(original, routes)
+}
+
+
+function proxy (original, routes) {
   return new Proxy(original, {
     get(target, key, receiver) {
       const method = target[key]
