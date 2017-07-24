@@ -6,7 +6,14 @@
  */
 
 module.exports = function () {
-  // do something
+  const routes = {}
+  return {
+    get : (path, cb) => {
+      if (cb) {
+        routes['get']= cb
+      } else {
+        return routes['get']()
+      }
+    }
+  }
 }
-
-  

@@ -4,10 +4,12 @@
  */
 
 const test = require('tape')
+const service = require('..')
 
-test('this is an example', assert => {
+
+test('should create get router', assert => {
   assert.plan(1)
-  assert.equal(1 + 2, 3)
+  const app = service()
+  app.get('/', () => 'hello world!')
+  assert.equal(app.get('/'), 'hello world!')
 })
-
-  
