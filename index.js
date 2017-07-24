@@ -11,10 +11,11 @@ const router = require('./lib/router')
  * @api public
  */
 
-module.exports = function () {
+module.exports = function (cb) {
   const routes = {}
-  const original = function () {
-
+  let proxied
+  const original = function (...args) {
+    return cb.apply(proxied, args)
   }
 
   /**
@@ -45,7 +46,8 @@ module.exports = function () {
   original.routes = () => {
 
   }
-  return proxy(original, routes)
+  proxied =  proxy(original, routes)
+  return proxied
 }
 
 

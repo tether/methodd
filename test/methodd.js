@@ -103,17 +103,30 @@ test('should alias route', assert => {
   app.get('/hello')
 })
 
-test('should alias regexp route', assert => {
-  assert.plan(1)
-  const app = service()
-  app.alias('get', '/:name', '/foo/bar?id=:name')
-  app.get('/foo/bar', (query) => {
-    assert.equal(query.id, 'hello')
-  })
-  app.get('/hello')
-})
+// test('should alias regexp route', assert => {
+//   assert.plan(1)
+//   const app = service()
+//   app.alias('get', '/:name', '/foo/bar?id=:name')
+//   app.get('/foo/bar', (query) => {
+//     assert.equal(query.id, 'hello')
+//   })
+//   app.get('/hello')
+// })
 
 test('should return a function', assert => {
   assert.plan(1)
   assert.equal(typeof service(), 'function')
+})
+
+test('should accept middleware function', assert => {
+  assert.plan(1)
+  const app = service(function(req) {
+    return this[req.method](req.url)
+  })
+
+  app.get('/hello', () => assert.ok('test passed'))
+  app({
+    method: 'get',
+    url: '/hello'
+  })
 })
