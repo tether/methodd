@@ -63,3 +63,15 @@ test('should pass arguments to routes', assert => {
     foo: 'bar'
   }, 'hello world')
 })
+
+test('should accept regexp routes and mixin object arguments', assert => {
+  assert.plan(2)
+  const app = service()
+  app.get('/:name', query => {
+    assert.equal(query.name, 'foo')
+    assert.equal(query.city, 'calgary')
+  })
+  app.get('/foo', {
+    city: 'calgary'
+  })
+})

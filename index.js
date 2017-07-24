@@ -1,3 +1,8 @@
+/**
+ * Dependencies.
+ */
+
+const router = require('./lib/router')
 
 /**
  * This is a simple description.
@@ -18,11 +23,12 @@ module.exports = function () {
       else return function (path, ...args) {
         const cb = args[0]
         if (typeof cb === 'function') {
-          const obj = routes[key] || {}
-          obj[path] = cb
+          const obj = routes[key] || router()
+          obj.add(path, cb)
           routes[key] = obj
         } else {
-          return routes[key][path](...args)
+          return routes[key].exec(path, ...args)
+          //return routes[key][path](...args)
         }
       }
     }

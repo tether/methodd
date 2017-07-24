@@ -21,5 +21,8 @@
   "homepage": "https://github.com/tether/methodd#readme",
   "devDependencies": {
     "tape": "*"
+  },
+  "dependencies": {
+    "path-to-regexp": "^1.7.0"
   }
 }
