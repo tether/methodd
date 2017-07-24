@@ -14,7 +14,7 @@ const router = require('./lib/router')
 module.exports = function (cb) {
   const routes = {}
   const original = function (...args) {
-    return cb(...args)
+    return cb && cb(...args)
   }
 
   /**
