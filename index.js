@@ -13,9 +13,8 @@ const router = require('./lib/router')
 
 module.exports = function (cb) {
   const routes = {}
-  let proxied
   const original = function (...args) {
-    return cb.apply(proxied, args)
+    return cb(...args)
   }
 
   /**
@@ -46,8 +45,7 @@ module.exports = function (cb) {
   original.routes = () => {
 
   }
-  proxied =  proxy(original, routes)
-  return proxied
+  return proxy(original, routes)
 }
 
 

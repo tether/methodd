@@ -121,7 +121,7 @@ test('should return a function', assert => {
 test('should accept middleware function', assert => {
   assert.plan(1)
   const app = service(function(req) {
-    return this[req.method](req.url)
+    return app[req.method](req.url)
   })
 
   app.get('/hello', () => assert.ok('test passed'))
