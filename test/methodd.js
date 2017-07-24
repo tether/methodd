@@ -75,3 +75,12 @@ test('should accept regexp routes and mixin object arguments', assert => {
     city: 'calgary'
   })
 })
+
+test('should return undefined if route does not exist', assert => {
+  assert.plan(1)
+  const app = service()
+  let result
+  app.get('/', () => result = 'something')
+  app.get('/hello')
+  assert.equal(result == null, true)
+})
