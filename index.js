@@ -67,12 +67,12 @@ module.exports = function (cb) {
 
   original.alias = original.add
 
-  original.use = (other) => {
-    const methods = other.routes()
-    Object.keys(methods)
-      .map(key => {
-      })
-  }
+  // original.use = (other) => {
+  //   const methods = other.routes()
+  //   Object.keys(methods).map(key => {
+  //     console.log(key, methods[key])
+  //   })
+  // }
 
   original.routes = () => {
     return routes

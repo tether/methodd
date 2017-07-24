@@ -127,6 +127,25 @@ test('should alias route', assert => {
   app.get('/hello')
 })
 
+test('should create multiple alias at once', assert => {
+  assert.plan(3)
+  const app = service()
+  app.get('/foo/bar', () => 'hello foo and bar')
+  app.post('/bar', () => 'hello bar')
+  app.alias({
+    'get': {
+      '/hello': '/foo/bar',
+      '/super': '/hello'
+    },
+    'post': {
+      '/foo': '/bar'
+    }
+  })
+  assert.equal(app.get('/hello'), 'hello foo and bar')
+  assert.equal(app.get('/super'), 'hello foo and bar')
+  assert.equal(app.post('/foo'), 'hello bar')
+})
+
 // test('should alias regexp route', assert => {
 //   assert.plan(1)
 //   const app = service()
