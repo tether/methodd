@@ -8,6 +8,8 @@
 module.exports = function () {
   const routes = {}
   return {
+    alias: () => {},
+    routes: () => {},
     get : (path, cb) => {
       if (cb) {
         routes['get']= cb
