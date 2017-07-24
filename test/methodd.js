@@ -22,6 +22,13 @@ test('should have static methods used for other things than routing', assert => 
   assert.equal(typeof app.routes, 'function')
 })
 
+test('should add method for routing', assert => {
+  assert.plan(1)
+  const app = service()
+  app.add('get', '/hello', () => 'hello world')
+  assert.equal(app.get('/hello'), 'hello world')
+})
+
 test('should create dynamic method(s) for routing', assert => {
   assert.plan(2)
   const app = service()
@@ -134,3 +141,14 @@ test('should accept middleware function', assert => {
   })
   assert.equal(result, 'hello world')
 })
+
+// test('should merge two service', assert => {
+//   assert.plan(2)
+//   const one = service()
+//   one.get('/hello', () => 'hello world')
+//   const two = service()
+//   two.get('/', () => 'welcome')
+//   two.use(one)
+//   assert.equal(two.get('/'), 'welcome')
+//   assert.equal(two.get('/hello'), 'welcome')
+// })

@@ -42,8 +42,16 @@ module.exports = function (cb) {
    */
 
   original.alias = original.add
-  original.routes = () => {
 
+  original.use = (other) => {
+    const methods = other.routes()
+    Object.keys(methods)
+      .map(key => {
+      })
+  }
+
+  original.routes = () => {
+    return routes
   }
   return proxy(original, routes)
 }

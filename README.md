@@ -27,7 +27,6 @@ app.get('/', {
 
 app.get('/foo')
 // => Your name is foo
-
 ```
 
 ## Installation
