@@ -21,10 +21,10 @@ test('should have static methods used for other things than routing', assert => 
   assert.equal(typeof app.routes, 'function')
 })
 
-//
-// test('should create dynamic router', assert => {
-//   assert.plan(1)
-//   const app = service()
-//   app.options('/', () => 'hello world!')
-//   assert.equal(app.options('/'), 'hello world!')
-// })
+
+test('should create dynamic router', assert => {
+  assert.plan(1)
+  const app = service()
+  app.options('/', () => 'hello world!')
+  assert.equal(app.options('/'), 'hello world!')
+})
