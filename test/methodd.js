@@ -15,8 +15,9 @@ test('should create basic get route', assert => {
 })
 
 test('should have static methods used for other things than routing', assert => {
-  assert.plan(2)
+  assert.plan(3)
   const app = service()
+  assert.equal(typeof app.add, 'function')
   assert.equal(typeof app.alias, 'function')
   assert.equal(typeof app.routes, 'function')
 })
@@ -92,6 +93,14 @@ test('should keep silent if route has not been defined', assert => {
   const app = service()
   app.get('/hello')
   assert.ok('test passed')
+})
+
+test('should alias route', assert => {
+  assert.plan(1)
+  const app = service()
+  app.alias('get', '/hello', '/foo/bar')
+  app.get('/foo/bar', () => assert.ok('test passed'))
+  app.get('/hello')
 })
 
 test('should return a function', assert => {

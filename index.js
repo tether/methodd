@@ -4,6 +4,7 @@
 
 const router = require('./lib/router')
 
+
 /**
  * This is a simple description.
  *
@@ -15,12 +16,26 @@ module.exports = function () {
   const original = function () {
 
   }
+  original.add = (key, path, cb) => {
+    const obj = routes[key] || router()
+    obj.add(path, cb)
+    routes[key] = obj
+  }
+  original.alias = original.add
+  original.routes = () => {
 
-  original.alias = () => {}
-  original.routes = () => {}
+  }
   return proxy(original, routes)
 }
 
+
+/**
+ * Proxy function with router.
+ *
+ * @param {Function} original
+ * @param {Object} routes
+ * @api private
+ */
 
 function proxy (original, routes) {
   return new Proxy(original, {
@@ -30,9 +45,7 @@ function proxy (original, routes) {
       else return function (path, ...args) {
         const cb = args[0]
         if (typeof cb === 'function') {
-          const obj = routes[key] || router()
-          obj.add(path, cb)
-          routes[key] = obj
+          original.add(key, path, cb)
         } else {
           const fn = routes[key]
           return fn && fn.exec(path, ...args)
