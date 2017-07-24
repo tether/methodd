@@ -13,9 +13,11 @@ const router = require('./lib/router')
 
 module.exports = function (cb) {
   const routes = {}
+
   const original = function (...args) {
     return cb && cb(...args)
   }
+
 
   /**
    * Add a method router.
@@ -26,10 +28,32 @@ module.exports = function (cb) {
    * @api public
    */
 
-  original.add = (key, path, cb) => {
+  const add = (key, path, cb) => {
     const obj = routes[key] || router()
     obj.add(path, cb)
     routes[key] = obj
+  }
+
+  /**
+   * Add method(s)
+   *
+   * @param {String} key
+   * @param {String} path
+   * @param {Function} cb
+   * @api public
+   */
+
+  original.add = (keys, path, cb) => {
+    if (typeof keys === 'object') {
+      Object.keys(keys).map(key => {
+        const method = keys[key]
+        Object.keys(method).map(p => {
+          add(key, p, method[p])
+        })
+      })
+    } else {
+      add(keys, path, cb)
+    }
   }
 
   /**

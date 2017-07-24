@@ -29,6 +29,23 @@ test('should add method for routing', assert => {
   assert.equal(app.get('/hello'), 'hello world')
 })
 
+test('should add multiple method for routing', assert => {
+  assert.plan(3)
+  const app = service()
+  app.add({
+    'get': {
+      '/': () => 'hello world',
+      '/foo': () => 'hello foo'
+    },
+    'post': {
+      '/': () => 'something'
+    }
+  })
+  assert.equal(app.get('/'), 'hello world')
+  assert.equal(app.get('/foo'), 'hello foo')
+  assert.equal(app.post('/'), 'something')
+})
+
 test('should create dynamic method(s) for routing', assert => {
   assert.plan(2)
   const app = service()
