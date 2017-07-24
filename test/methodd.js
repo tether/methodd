@@ -81,6 +81,15 @@ test('should return undefined if route does not exist', assert => {
   const app = service()
   let result
   app.get('/', () => result = 'something')
+  app.post('/hello', () => result = 'something')
+  app.get('/:other/:name', () => result = 'something')
   app.get('/hello')
   assert.equal(result == null, true)
+})
+
+test('should keep silent if route has not been defined', assert => {
+  assert.plan(1)
+  const app = service()
+  app.get('/hello')
+  assert.ok('test passed')
 })

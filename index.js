@@ -27,8 +27,8 @@ module.exports = function () {
           obj.add(path, cb)
           routes[key] = obj
         } else {
-          return routes[key].exec(path, ...args)
-          //return routes[key][path](...args)
+          const fn = routes[key]
+          return fn && fn.exec(path, ...args)
         }
       }
     }
