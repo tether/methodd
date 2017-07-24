@@ -16,11 +16,31 @@ module.exports = function () {
   const original = function () {
 
   }
+
+  /**
+   * Add a method router.
+   *
+   * @param {String} key
+   * @param {String} path
+   * @param {Function} cb
+   * @api public
+   */
+
   original.add = (key, path, cb) => {
     const obj = routes[key] || router()
     obj.add(path, cb)
     routes[key] = obj
   }
+
+  /**
+   * Create alias for method routes.
+
+   * @param {String} key
+   * @param {String} path
+   * @param {Function } cb
+   * @api public
+   */
+
   original.alias = original.add
   original.routes = () => {
 
