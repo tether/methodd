@@ -49,3 +49,17 @@ test('should create multiple routes for different methods', assert => {
   assert.equal(app.post('/'), 'post world')
   assert.equal(app.post('/foo'), 'post foo')
 })
+
+test('should pass arguments to routes', assert => {
+  assert.plan(2)
+  const app = service()
+  app.get('/', (query, data) => {
+    assert.deepEqual(query, {
+      foo: 'bar'
+    })
+    assert.equal(data, 'hello world')
+  })
+  app.get('/', {
+    foo: 'bar'
+  }, 'hello world')
+})
