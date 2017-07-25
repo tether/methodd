@@ -179,11 +179,18 @@ test('should accept middleware function', assert => {
   assert.equal(result, 'hello world')
 })
 
-test('should get route handler', assert => {
+test('should get simple route handler', assert => {
   assert.plan(1)
   const app = service()
   app.get('/hello', () => 'hello world')
   assert.equal(app.has('get', '/hello')(), 'hello world')
+})
+
+test('should get dynamic route handler', assert => {
+  assert.plan(1)
+  const app = service()
+  app.get('/:name', (query) => 'hello ' + query.name)
+  assert.equal(app.has('get', '/foo')(), 'hello foo')
 })
 
 // test('should merge two service', assert => {
