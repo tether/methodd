@@ -34,6 +34,7 @@ module.exports = function (cb) {
     routes[key] = obj
   }
 
+
   /**
    * Add method(s)
    *
@@ -66,6 +67,11 @@ module.exports = function (cb) {
    */
 
   original.alias = original.add
+
+  original.has = (key, path) => {
+    const fn = routes[key]
+    return fn && fn.get(path)
+  }
 
   // original.use = (other) => {
   //   const methods = other.routes()

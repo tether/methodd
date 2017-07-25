@@ -15,9 +15,10 @@ test('should create basic get route', assert => {
 })
 
 test('should have static methods used for other things than routing', assert => {
-  assert.plan(3)
+  assert.plan(4)
   const app = service()
   assert.equal(typeof app.add, 'function')
+  assert.equal(typeof app.has, 'function')
   assert.equal(typeof app.alias, 'function')
   assert.equal(typeof app.routes, 'function')
 })
@@ -176,6 +177,13 @@ test('should accept middleware function', assert => {
     url: '/hello'
   })
   assert.equal(result, 'hello world')
+})
+
+test('should get route handler', assert => {
+  assert.plan(1)
+  const app = service()
+  app.get('/hello', () => 'hello world')
+  assert.equal(app.has('get', '/hello')(), 'hello world')
 })
 
 // test('should merge two service', assert => {
