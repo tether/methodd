@@ -1,7 +1,7 @@
 {
   "name": "methodd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create routing methods/services you can plug to anyting",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
@@ -11,9 +11,13 @@
     "url": "git+https://github.com/tether/methodd.git"
   },
   "keywords": [
-    "tether"
+    "router",
+    "routing",
+    "service",
+    "method",
+    "http"
   ],
-  "author": "Petrofeed Inc",
+  "author": "Olivier Wietrich, Petrofeed Inc",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tether/methodd/issues"
