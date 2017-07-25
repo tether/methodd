@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/npm/dm/methodd.svg)](http://npm-stat.com/charts.html?package=methodd)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)
 
-Create routing methods/services you can plug to anyting.
+Create routing methods/services you can plug to anything.
 
 ## Usage
 
