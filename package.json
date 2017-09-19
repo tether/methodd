@@ -1,6 +1,6 @@
 {
   "name": "methodd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create routing methods/services you can plug to anything",
   "main": "index.js",
   "scripts": {
